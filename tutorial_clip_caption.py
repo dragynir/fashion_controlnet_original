@@ -54,6 +54,7 @@ def run_clip(folder_path, prompt_mode):
 
 if __name__ == '__main__':
     # conda activate clip-interrogator
+    # cd C:\Projects\FireBall\ControlNetMain
     # python tutorial_clip_caption.py
 
     folder_path = "./training/iMaterialist(Fashion)/train"
