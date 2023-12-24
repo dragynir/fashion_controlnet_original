@@ -13,17 +13,19 @@ import pandas as pd
 class MyDataset(Dataset):
     def __init__(self, opt):
         self.opt = opt
-        self.image_dir = opt.image_folder
+        self.image_dir = opt.image_dir
         self.df_path = opt.df_path
+        self.attributes_path = opt.attributes_path
+
         self.width = opt.width
         self.height = opt.height
-        self.data = pd.read_csv(self.df_path)
+        self.data = self.prepare_dataset(self.df_path, self.attributes_path)
 
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, idx):
-        item = self.data[idx]
+        item = self.data.iloc[idx]
 
         prompt = self.get_prompt(item)
 
@@ -38,7 +40,7 @@ class MyDataset(Dataset):
 
         labels = []
         for m, (annotation, label) in enumerate(
-                zip(item["EncodedPixels"], item["labels"])
+                zip(item["EncodedPixels"], item["CategoryId"])
         ):
             sub_mask = self.rle_decode(
                 annotation, (item["Height"], item["Width"])
@@ -134,3 +136,56 @@ class MyDataset(Dataset):
             img[lo:hi] = 1
         # reshape as a 2d mask image
         return img.reshape(shape).T  # Needed to align to RLE direction
+
+    def prepare_dataset(self, df_path: str, attributes_path: str):
+
+        label_description = open(attributes_path).read()
+        image_info = json.loads(label_description)
+
+        categories = pd.DataFrame(image_info['categories'])
+        attributes = pd.DataFrame(image_info['attributes'])
+
+        train_df = pd.read_csv(df_path)
+
+        # find records with attributes
+        train_df['hasAttributes'] = train_df.ClassId.apply(lambda x: x.find("_") > 0)
+
+        # get main category
+        train_df['CategoryId'] = train_df.ClassId.apply(lambda x: x.split("_")[0]).astype(int)
+
+        # supercategory - это категории по типу(верхняя часть тела, нижняя, голова и т д) - по ней для сегмы надо определить в группы
+        # name - тут более подробное описание - что на картинке есть
+        train_df = train_df.merge(categories, left_on="CategoryId", right_on="id")
+
+        size_df = train_df.groupby("ImageId")[["Height", "Width"]].mean().reset_index()
+        image_df = (
+            train_df.groupby("ImageId")[["EncodedPixels", "CategoryId", "name", "supercategory"]]
+            .agg(lambda x: list(x))
+            .reset_index()
+        )
+        image_df = image_df.merge(size_df, on="ImageId", how="left")
+
+        # extract all available attributes and create separate table
+        cat_attributes = []
+        for i in train_df[train_df.hasAttributes].index:
+            item = train_df.loc[i]
+            xs = item.ClassId.split("_")
+            for a in xs[1:]:
+                cat_attributes.append({'ImageId': item.ImageId, 'category': int(xs[0]), 'attribute': int(a)})
+        cat_attributes = pd.DataFrame(cat_attributes)
+
+        cat_attributes = cat_attributes.merge(
+            categories, left_on="category", right_on="id"
+        ).merge(attributes, left_on="attribute", right_on="id", suffixes=("", "_attribute"))
+
+        cat_image_df = (
+            cat_attributes.groupby("ImageId")[["name", "name_attribute"]]
+            .agg(lambda x: list(x))
+            .reset_index()
+        )
+        named_attributes = []
+        for _, row in cat_image_df.iterrows():
+            named_attributes.append({k: v for k, v in zip(row['name'], row['name_attribute'])})
+        cat_image_df['named_attributes'] = named_attributes
+
+        return image_df.merge(cat_image_df[["ImageId", "named_attributes"]], on="ImageId", how="left")

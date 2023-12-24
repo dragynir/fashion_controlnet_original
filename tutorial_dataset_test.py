@@ -7,13 +7,15 @@ from tutorial_dataset import MyDataset
 class Config:
     image_dir: str
     df_path: str
+    attributes_path: str
     width: int
     height: int
 
 
 config = Config(
     image_dir='./training/iMaterialist(Fashion)/train',
-    df_path='../training/iMaterialist(Fashion)/dataset/train.csv',
+    df_path='./training/iMaterialist(Fashion)/train.csv',
+    attributes_path='../training/iMaterialist(Fashion)/label_descriptions.json',
     width=512,
     height=512,
 )
