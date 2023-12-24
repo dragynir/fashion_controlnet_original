@@ -15,7 +15,7 @@ class Config:
 config = Config(
     image_dir='./training/iMaterialist(Fashion)/train',
     df_path='./training/iMaterialist(Fashion)/train.csv',
-    attributes_path='../training/iMaterialist(Fashion)/label_descriptions.json',
+    attributes_path='./training/iMaterialist(Fashion)/label_descriptions.json',
     width=512,
     height=512,
 )
