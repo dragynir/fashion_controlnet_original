@@ -108,9 +108,14 @@ class MyDataset(Dataset):
         final_label = first_channel + second_channel * 2 + third_channel * 3
         conflict_mask = (final_label <= 3).astype("uint8")
         source = (conflict_mask) * final_label + (1 - conflict_mask) * 1
+        # оставляю маску как в https://github.com/levindabhi/cloth-segmentation/tree/main
+        # чтобы можно было юзать предобученную сегму
 
-        # Normalize source images to [0, 1].
-        # source = source.astype(np.float32) / 255.0
+        # Normalize source images to [0, 1]. (У нас четыре класса, поэтому делим на 3
+        source = source.astype(np.float32) / 3.0
+        # Делаем трехканальное изображение
+        source = np.stack([source, source, source], axis=-1)
+
         return dict(jpg=target, txt=prompt, hint=source)
 
     def get_prompt(self, item) -> str:
@@ -158,6 +163,8 @@ class MyDataset(Dataset):
         train_df = train_df.merge(categories, left_on="CategoryId", right_on="id")
 
         size_df = train_df.groupby("ImageId")[["Height", "Width"]].mean().reset_index()
+        size_df = size_df.astype({'Height': 'int', 'Width': 'int'})
+
         image_df = (
             train_df.groupby("ImageId")[["EncodedPixels", "CategoryId", "name", "supercategory"]]
             .agg(lambda x: list(x))
