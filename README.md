@@ -12,6 +12,9 @@
 
 -[ ] Гуглить: extarct prompt from image
 Прогоняю CLIP или аналогичную модель чтобы получить промпты, также можно Grounding dino или
+1) CLIP (https://github.com/pharmapsychotic/clip-interrogator)
+2) Kosmos2 https://github.com/microsoft/unilm/tree/master/kosmos-2
+
  (https://huggingface.co/spaces/ydshieh/Kosmos-2)
 
 -[ ] Замешиваю промпты из датасета с новыми промптами
