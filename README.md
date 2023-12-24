@@ -14,6 +14,9 @@
 
 https://www.kaggle.com/discussions/general/74235 - kaggle датасет в colab
 -[ ] Гуглить: extarct prompt from image
+
+Мой colab с clip: https://colab.research.google.com/drive/1fbqojIlYDpf9HYwPA3Noe4c4ikeW-EHM
+
 Прогоняю CLIP или аналогичную модель чтобы получить промпты, также можно Grounding dino или
 1) CLIP (https://github.com/pharmapsychotic/clip-interrogator)
    2) Сначала пробую fast mode
