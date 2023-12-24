@@ -48,6 +48,7 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 
 # Советы
 
+0) conda activate control
 1) добавляем ControlNet к существующему чекпоинту stable diffusion
 python tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.ckpt
 2) потом можем запускать обучение tutorial_train
