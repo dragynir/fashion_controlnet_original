@@ -53,10 +53,16 @@ def run_clip(folder_path, prompt_mode):
 
 
 if __name__ == '__main__':
+    # Установка
+    # pip install clip-interrogator==0.5.4
+    # pip uninstall transformers
+    # pip install transformers==4.26.1
+
     # conda activate clip-interrogator
     # cd C:\Projects\FireBall\ControlNetMain
     # python tutorial_clip_caption.py
 
+    # Прогон всех изображений около 6 часов на fast mode
     folder_path = "./training/iMaterialist(Fashion)/train"
     prompt_mode = 'fast'  # @param ["best","fast","classic","negative"]
     run_clip(folder_path, prompt_mode)
