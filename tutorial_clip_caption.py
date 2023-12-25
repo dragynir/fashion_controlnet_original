@@ -40,7 +40,7 @@ def run_clip(folder_path, prompt_mode):
 
     print('Start clip captioning...')
 
-    files = files[34899:] # продолжаем caption
+    files = files[34800:]  # продолжаем caption
 
     for idx, file_name in enumerate(tqdm(files)):
         image = Image.open(os.path.join(folder_path, file_name)).convert('RGB')
