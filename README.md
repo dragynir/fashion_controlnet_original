@@ -74,4 +74,40 @@ python tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.c
 3) чтобы прочекать датасет - tutorial_dataset
 
 
-AnyDoor изучить paper
+# Список идей для Controlnet
+
+https://github.com/lllyasviel/ControlNet/issues/53
+
+https://github.com/lllyasviel/ControlNet/issues/190
+
+https://github.com/lllyasviel/ControlNet/issues/224
+
+https://github.com/lllyasviel/ControlNet/issues/238
+
+https://github.com/lllyasviel/ControlNet/issues/291
+
+https://github.com/lllyasviel/ControlNet/issues/333
+
+https://github.com/lllyasviel/ControlNet/issues/413
+
+https://github.com/lllyasviel/ControlNet/issues/445
+
+https://github.com/lllyasviel/ControlNet/issues/528
+
+https://github.com/lllyasviel/ControlNet/discussions/30
+
+https://github.com/lllyasviel/ControlNet/discussions/35
+
+https://github.com/lllyasviel/ControlNet/discussions/66
+
+https://github.com/lllyasviel/ControlNet/discussions/114
+
+https://github.com/lllyasviel/ControlNet/discussions/286
+
+https://github.com/lllyasviel/ControlNet/discussions/318
+
+https://github.com/lllyasviel/ControlNet/discussions/403
+
+https://github.com/lllyasviel/ControlNet/discussions/440
+
+https://github.com/lllyasviel/ControlNet/discussions/494
