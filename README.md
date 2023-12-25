@@ -10,25 +10,26 @@
 
 -[x] Извлекаю из датасета промпты с названием одежды (будем их подавать на вход при обучении)
 
--[ ] Ставлю clip-interrogate на винду
+-[x] Ставлю clip-interrogate на винду
 
 https://www.kaggle.com/discussions/general/74235 - kaggle датасет в colab
 -[ ] Гуглить: extarct prompt from image
 Мой colab с clip: https://colab.research.google.com/drive/1fbqojIlYDpf9HYwPA3Noe4c4ikeW-EHM
 Прогоняю CLIP или аналогичную модель чтобы получить промпты, также можно Grounding dino или
 1) CLIP (https://github.com/pharmapsychotic/clip-interrogator)
-   2) Сначала пробую fast mode
+   2) -[x] Сначала пробую fast mode
    3) Потом создаю промпты с помощью best
 2) Kosmos2 https://github.com/microsoft/unilm/tree/master/kosmos-2
 
  (https://huggingface.co/spaces/ydshieh/Kosmos-2)
 
--[ ] Обучаю контролнет на масках сегментации
-- (Тут надо разобратся как лучше ресайзить/кропать изображения)
+- [ ] Тут надо разобратся как лучше ресайзить/кропать изображения
 - Нужно сохранять aspect ratio, т к по умолчанию он не сохраняется у меня (512, 512) ресайз идет
 - Посмотреть как в оригинальном controlnet (в diffusers сделано)
 - Скорее всего нужно кропать по маске сегментации(можно будет перегенерить промпты)
 
+-[ ] Обучаю контролнет на масках сегментации
+- 
 -[ ] Убираю плохие изображения из датасета FastDup
 - FastDup https://github.com/visual-layer/fastdup
 - поможет убрать дубликаты и плохие изображения
