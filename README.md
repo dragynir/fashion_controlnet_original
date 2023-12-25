@@ -30,6 +30,7 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 -[ ] Убираю плохие изображения из датасета FastDup
 - FastDup https://github.com/visual-layer/fastdup
 - поможет убрать дубликаты и плохие изображения
+- разобраться с изображениями где нет людей
 
 
 -[ ] Замешиваю промпты из датасета с новыми промптами
