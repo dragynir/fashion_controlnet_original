@@ -11,6 +11,7 @@ import pandas as pd
 
 
 class FashionDataset(Dataset):
+    """Image dataset for Controlnet training."""
     def __init__(self, opt):
         self.opt = opt
         self.image_dir = opt.image_dir
@@ -22,17 +23,24 @@ class FashionDataset(Dataset):
         self.data = self.prepare_dataset(self.df_path, self.attributes_path)
 
     def __len__(self):
+        """Return length of dataset."""
         return len(self.data)
 
     def __getitem__(self, idx):
+        """Create single datapoint."""
         item = self.data.iloc[idx]
 
         prompt = self.get_prompt(item)
 
-        target = Image.open(os.path.join(self.image_dir, item['ImageId'])).convert("RGB")
-        target = target.resize((self.width, self.height), resample=Image.BICUBIC)
-        # Normalize target images to [-1, 1].
-        target = (np.array(target).astype(np.float32) / 127.5) - 1.0
+        target = self.get_target(item)
+        source = self.get_source(item)
+
+        return dict(jpg=target, txt=prompt, hint=source)
+
+    def get_source(self, item) -> np.ndarray:
+        """Create source image (control image)."""
+
+        # TODO adaptive resize for image and mask
 
         mask = np.zeros(
             (len(item["EncodedPixels"]), self.width, self.height), dtype=np.uint8
@@ -115,14 +123,25 @@ class FashionDataset(Dataset):
         source = source.astype(np.float32) / 3.0
         # Делаем трехканальное изображение
         source = np.stack([source, source, source], axis=-1)
+        return source
 
-        return dict(jpg=target, txt=prompt, hint=source)
+    def get_target(self, item) -> np.ndarray:
+        """Create target image (otuput)"""
+        target = Image.open(os.path.join(self.image_dir, item['ImageId'])).convert("RGB")
+        # TODO adaptive resize for image and mask
+
+        target = target.resize((self.width, self.height), resample=Image.BICUBIC)
+        # Normalize target images to [-1, 1].
+        target = (np.array(target).astype(np.float32) / 127.5) - 1.0
+        return target
 
     def get_prompt(self, item) -> str:
+        """Construct prompt from metadata."""
         return " ".join(list(item['name']))
 
     def rle_decode(self, mask_rle, shape):
-        """
+        """Decode mask from annotation.
+
         mask_rle: run-length as string formated: [start0] [length0] [start1] [length1]... in 1d array
         shape: (height,width) of array to return
         Returns numpy array according to the shape, 1 - mask, 0 - background
@@ -142,7 +161,8 @@ class FashionDataset(Dataset):
         # reshape as a 2d mask image
         return img.reshape(shape).T  # Needed to align to RLE direction
 
-    def prepare_dataset(self, df_path: str, attributes_path: str):
+    def prepare_dataset(self, df_path: str, attributes_path: str) -> pd.DataFrame:
+        """Create dataset from raw data."""
 
         label_description = open(attributes_path).read()
         image_info = json.loads(label_description)
