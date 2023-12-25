@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from tutorial_dataset import MyDataset
+from tutorial_dataset import FashionDataset
 
 
 @dataclass
@@ -21,7 +21,7 @@ config = Config(
 )
 
 
-dataset = MyDataset(config)
+dataset = FashionDataset(config)
 print(len(dataset))
 
 item = dataset[1234]

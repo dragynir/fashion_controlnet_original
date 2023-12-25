@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 import pandas as pd
 
 
-class MyDataset(Dataset):
+class FashionDataset(Dataset):
     def __init__(self, opt):
         self.opt = opt
         self.image_dir = opt.image_dir
