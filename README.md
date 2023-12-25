@@ -52,7 +52,8 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 - re-train that 3k steps with 100× batch size. Note that perhaps we should not do this
 - too extremely (perhaps 100x accumulation is too extreme), but you should consider that,
 - since "sudden converge" will always happen at that certain point, getting a better converge is more important.
-
+- But usually, if your logic batch size is already bigger than 256, then further extending the batch size is not very meaningful.
+- In that case, perhaps a better idea is to train more steps
 
 # Советы
 
