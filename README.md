@@ -46,6 +46,12 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 -[ ] В некоторых изображениях размечены не все люди
 -[ ] Обучение на 1 карточке 3090 будет примерно 5 дней
 -[ ] Есть две версии controlnet
+- Note that 3k to 7k steps is not very large, and you should consider larger batch size rather than more training steps.
+- If you can observe the "sudden converge" at 3k step using batch size 4,
+- then, rather than train it with 300k further steps, a better idea is to use 100× gradient accumulation to 
+- re-train that 3k steps with 100× batch size. Note that perhaps we should not do this
+- too extremely (perhaps 100x accumulation is too extreme), but you should consider that,
+- since "sudden converge" will always happen at that certain point, getting a better converge is more important.
 
 
 # Советы
