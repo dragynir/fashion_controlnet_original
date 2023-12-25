@@ -13,13 +13,13 @@
 -[x] Ставлю clip-interrogate на винду
 
 https://www.kaggle.com/discussions/general/74235 - kaggle датасет в colab
--[ ] Гуглить: extarct prompt from image
+-[x] Гуглить: extarct prompt from image
 Мой colab с clip: https://colab.research.google.com/drive/1fbqojIlYDpf9HYwPA3Noe4c4ikeW-EHM
 Прогоняю CLIP или аналогичную модель чтобы получить промпты, также можно Grounding dino или
 1) CLIP (https://github.com/pharmapsychotic/clip-interrogator)
    2) -[x] Сначала пробую fast mode
-   3) Потом создаю промпты с помощью best
-2) Kosmos2 https://github.com/microsoft/unilm/tree/master/kosmos-2
+   3) -[ ] Потом создаю промпты с помощью best
+2) -[ ] Kosmos2 https://github.com/microsoft/unilm/tree/master/kosmos-2
 
  (https://huggingface.co/spaces/ydshieh/Kosmos-2)
 
