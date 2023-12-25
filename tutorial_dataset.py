@@ -17,6 +17,7 @@ class FashionDataset(Dataset):
         self.image_dir = opt.image_dir
         self.df_path = opt.df_path
         self.attributes_path = opt.attributes_path
+        self.caption_path = opt.caption_path
 
         self.width = opt.width
         self.height = opt.height
@@ -137,7 +138,7 @@ class FashionDataset(Dataset):
 
     def get_prompt(self, item) -> str:
         """Construct prompt from metadata."""
-        return " ".join(list(item['name']))
+        return item['fast_clip_prompts']
 
     def rle_decode(self, mask_rle, shape):
         """Decode mask from annotation.
@@ -161,7 +162,7 @@ class FashionDataset(Dataset):
         # reshape as a 2d mask image
         return img.reshape(shape).T  # Needed to align to RLE direction
 
-    def prepare_dataset(self, df_path: str, attributes_path: str) -> pd.DataFrame:
+    def prepare_dataset(self, df_path: str, caption_path: str, attributes_path: str) -> pd.DataFrame:
         """Create dataset from raw data."""
 
         label_description = open(attributes_path).read()
@@ -171,6 +172,7 @@ class FashionDataset(Dataset):
         attributes = pd.DataFrame(image_info['attributes'])
 
         train_df = pd.read_csv(df_path)
+        caption_df = pd.read_csv(caption_path)
 
         # find records with attributes
         train_df['hasAttributes'] = train_df.ClassId.apply(lambda x: x.find("_") > 0)
@@ -215,4 +217,7 @@ class FashionDataset(Dataset):
             named_attributes.append({k: v for k, v in zip(row['name'], row['name_attribute'])})
         cat_image_df['named_attributes'] = named_attributes
 
-        return image_df.merge(cat_image_df[["ImageId", "named_attributes"]], on="ImageId", how="left")
+        image_df = image_df.merge(cat_image_df[["ImageId", "named_attributes"]], on="ImageId", how="left")
+        image_df = image_df.merge(caption_df, on="ImageId", how="left")
+
+        return image_df

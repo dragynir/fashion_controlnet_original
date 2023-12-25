@@ -24,6 +24,7 @@ class Config:
     image_dir: str
     df_path: str
     attributes_path: str
+    caption_path: str
     width: int
     height: int
 
@@ -62,6 +63,7 @@ if __name__ == '__main__':
         only_mid_control=False,
         image_dir='./training/iMaterialist(Fashion)/train',
         df_path='./training/iMaterialist(Fashion)/train.csv',
+        caption_path='./training/iMaterialist(Fashion)/caption.csv',
         attributes_path='./training/iMaterialist(Fashion)/label_descriptions.json',
         width=512,
         height=512,
