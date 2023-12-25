@@ -45,6 +45,7 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 
 -[ ] В некоторых изображениях размечены не все люди
 -[ ] Обучение на 1 карточке 3090 будет примерно 5 дней
+-[ ] Порядка 3M изображений для обучения Canny Controlnet нужно было
 -[ ] Есть две версии controlnet
 - Note that 3k to 7k steps is not very large, and you should consider larger batch size rather than more training steps.
 - If you can observe the "sudden converge" at 3k step using batch size 4,
