@@ -14,9 +14,7 @@
 
 https://www.kaggle.com/discussions/general/74235 - kaggle датасет в colab
 -[ ] Гуглить: extarct prompt from image
-
 Мой colab с clip: https://colab.research.google.com/drive/1fbqojIlYDpf9HYwPA3Noe4c4ikeW-EHM
-
 Прогоняю CLIP или аналогичную модель чтобы получить промпты, также можно Grounding dino или
 1) CLIP (https://github.com/pharmapsychotic/clip-interrogator)
    2) Сначала пробую fast mode
@@ -28,6 +26,11 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 -[ ] Обучаю контролнет на масках сегментации
 - (Тут можно разобратся как лучше ресайзить изображения)
 - Нужно сохранять aspect ratio, т к по умолчанию он не сохраняется у меня (512, 512) ресайз идет
+
+-[ ] Убираю плохие изображения из датасета 
+- FastDup https://github.com/visual-layer/fastdup
+- поможет убрать дубликаты и плохие изображения
+
 
 -[ ] Замешиваю промпты из датасета с новыми промптами
 
