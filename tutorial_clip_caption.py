@@ -39,6 +39,9 @@ def run_clip(folder_path, prompt_mode):
     proc_files = []
 
     print('Start clip captioning...')
+
+    files = files[34899:] # продолжаем caption
+
     for idx, file_name in enumerate(tqdm(files)):
         image = Image.open(os.path.join(folder_path, file_name)).convert('RGB')
         prompt = image_to_prompt(ci, image, prompt_mode)
@@ -49,7 +52,7 @@ def run_clip(folder_path, prompt_mode):
             df = pd.DataFrame()
             df[f'{prompt_mode}_clip_prompts'] = prompts
             df['ImageId'] = proc_files
-            df.to_csv('./training/iMaterialist(Fashion)/caption.csv', index=False)
+            df.to_csv('./training/iMaterialist(Fashion)/caption_2.csv', index=False)
 
 
 if __name__ == '__main__':
