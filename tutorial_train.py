@@ -55,7 +55,7 @@ if __name__ == '__main__':
     config = Config(
         resume_path='./models/control_sd21_ini.ckpt',
         model_config='./models/cldm_v21.yaml',
-        batch_size=4,
+        batch_size=32,
         logger_freq=300,
         learning_rate=1e-5,
         sd_locked=True,
