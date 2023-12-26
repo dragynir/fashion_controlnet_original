@@ -25,6 +25,8 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 
 - [x] Практические советы по controlnet https://civitai.com/articles/2078/play-in-control-controlnet-training-setup-guide
 
+- [ ] Тулза для обработки изображений
+ 
 - [ ] Тут надо разобратся как лучше ресайзить/кропать изображения
 - Нужно сохранять aspect ratio, т к по умолчанию он не сохраняется у меня (512, 512) ресайз идет
 - Посмотреть как в оригинальном controlnet (в diffusers сделано)
