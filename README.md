@@ -78,14 +78,6 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 - But usually, if your logic batch size is already bigger than 256, then further extending the batch size is not very meaningful.
 - In that case, perhaps a better idea is to train more steps
 
-# Советы
-
-0) conda activate control
-1) добавляем ControlNet к существующему чекпоинту stable diffusion
-python tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.ckpt
-2) потом можем запускать обучение tutorial_train
-3) чтобы прочекать датасет - tutorial_dataset
-
 
 # Список идей для Controlnet
 
@@ -124,3 +116,24 @@ https://github.com/lllyasviel/ControlNet/discussions/403
 https://github.com/lllyasviel/ControlNet/discussions/440
 
 https://github.com/lllyasviel/ControlNet/discussions/494
+
+
+# Запуск обучения
+
+
+## Настройка окружения
+
+`conda activate control
+`
+
+## Добавление controlnet к существуюшей модели stable diffusion
+`python tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.ckpt
+`
+
+`python tool_add_control_sd21.py ./models/v2-1_512-ema-pruned.ckpt ./models/control_sd21_ini.ckpt
+`
+
+## Обучение модели
+
+`python tutorial_train.py
+`

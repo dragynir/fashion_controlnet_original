@@ -50,13 +50,13 @@ def train_controlnet(opt: Config):
 
 if __name__ == '__main__':
     # for training version 1
-    # resume_path = './models/control_sd21_ini.ckpt',
-    # model_config = './models/cldm_v21.yaml',
+    # resume_path = './models/control_sd15_ini.ckpt',
+    # model_config = './models/cldm_v15.yaml',
 
     config = Config(
         resume_path='./models/control_sd21_ini.ckpt',
         model_config='./models/cldm_v21.yaml',
-        batch_size=32,
+        batch_size=4,  # 32
         logger_freq=300,
         learning_rate=1e-5,
         sd_locked=True,
