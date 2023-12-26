@@ -50,6 +50,9 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 
 - [ ] Тестируюсь на тестовом датасете (может там есть маски уже) (https://civitai.com/articles/2078/play-in-control-controlnet-training-setup-guide)
 
+- [ ] Записываю маски на диск для обучения diffusers (https://huggingface.co/docs/diffusers/v0.16.0/api/pipelines/stable_diffusion/controlnet)
+
+- [ ] Обучая diffusers версию
 
 -[ ] Далее обучаю unet, используя этот репозиторий - чтобы можно было юзать на новых изображениях (https://github.com/levindabhi/cloth-segmentation/tree/main)
 -[ ] Можно попробовать ее сначала найти - может есть где-то все же 
@@ -125,6 +128,12 @@ https://github.com/lllyasviel/ControlNet/discussions/494
 
 `conda activate control
 `
+
+## Доступные модели
+
+sdv1: https://huggingface.co/stabilityai/stable-diffusion-2-1-base/tree/main
+
+sdv2: https://huggingface.co/runwayml/stable-diffusion-v1-5/tree/main
 
 ## Добавление controlnet к существуюшей модели stable diffusion
 `python tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.ckpt
