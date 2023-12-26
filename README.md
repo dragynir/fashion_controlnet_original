@@ -26,6 +26,9 @@ https://www.kaggle.com/discussions/general/74235 - kaggle датасет в cola
 - [x] Практические советы по controlnet https://civitai.com/articles/2078/play-in-control-controlnet-training-setup-guide
 
 - [ ] Нахожу мощности для обучения и запаковываю датасет в kaggle датасет
+  - Кластер на работе 
+  - Кластер у Саши
+  - Kaggle
 
 -[ ] Обучаю контролнет на масках сегментации с ресайзом (512, 512)
 
