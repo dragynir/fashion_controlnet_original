@@ -21,7 +21,7 @@ class FashionDataset(Dataset):
 
         self.width = opt.width
         self.height = opt.height
-        self.data = self.prepare_dataset(self.df_path, self.attributes_path)
+        self.data = self.prepare_dataset(self.df_path, self.caption_path, self.attributes_path)
 
     def __len__(self):
         """Return length of dataset."""
