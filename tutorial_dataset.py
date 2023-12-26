@@ -41,8 +41,6 @@ class FashionDataset(Dataset):
     def get_source(self, item) -> np.ndarray:
         """Create source image (control image)."""
 
-        # TODO adaptive resize for image and mask
-
         mask = np.zeros(
             (len(item["EncodedPixels"]), self.width, self.height), dtype=np.uint8
         )
@@ -129,8 +127,6 @@ class FashionDataset(Dataset):
     def get_target(self, item) -> np.ndarray:
         """Create target image (otuput)"""
         target = Image.open(os.path.join(self.image_dir, item['ImageId'])).convert("RGB")
-        # TODO adaptive resize for image and mask
-
         target = target.resize((self.width, self.height), resample=Image.BICUBIC)
         # Normalize target images to [-1, 1].
         target = (np.array(target).astype(np.float32) / 127.5) - 1.0
